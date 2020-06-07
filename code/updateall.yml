@@ -1,0 +1,9 @@
+
+---
+  - name: updateall
+    hosts: linux
+    tasks:
+     - name: update all packages same as -syu
+       pacman:
+         update_cache: yes
+         upgrade: yes

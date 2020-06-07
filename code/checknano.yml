@@ -1,0 +1,8 @@
+---
+  - name: checknano
+    hosts: linux
+    tasks:
+     - name: ensure nano is there
+       pacman:
+         name: nano
+         state: latest
