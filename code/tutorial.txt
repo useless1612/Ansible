@@ -1,0 +1,48 @@
+Tutorial
+-- dieses tutorial ist für manjaro gedacht --
+
+install ansible:
+sudo pacman -S ansible
+
+
+ordner in dem alles angelegt wird:
+cd /etc/ansible 
+
+
+
+in diesem ordner findest du 4 files: 
+ansible.cfg - die config für dieses tutorial
+
+hosts - die inventory file in der die hosts aufgelistet sind
+	(die ip adressen müssen natürlich verändert werden,
+	dafür auf den clients einfach "ip addr" eingeben)
+
+checknano.yml - ein playbook das checkt ob nano aktuell ist und es aktualisiert -
+
+updateall.yml - ein playbook das alle programme auf dem clients aktualisiert
+
+
+mit ping könnt ihr prüfen ob die clients erreichbar sind
+ping:
+ansible linux -m ping
+
+falls nicht checkt ob bei den clients ssh zugriff auf root erlaubt ist:
+
+root ssh:
+
+sudo nano /etc/ssh/sshd_config
+
+	#PermitRootLogin prohibit-password
+	PermitRootLogin yes
+	PasswordAuthentication yes
+
+sudo systemctl restart sshd
+
+wenn ihr das os der clients herausfinden wollt:
+ansible linux -a "cat /etc/os-release"
+
+wenn ihr die playbooks ausführen wollt:
+ansible-playbook checknano.yml
+
+ansible-playbook updateall.yml
+
